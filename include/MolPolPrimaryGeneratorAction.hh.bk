@@ -1,0 +1,44 @@
+
+#ifndef MolPolPrimaryGeneratorAction_h
+#define MolPolPrimaryGeneratorAction_h 1
+
+#include "G4VUserPrimaryGeneratorAction.hh"
+#include "G4String.hh"
+
+class G4ParticleGun;
+class G4Event;
+class MolPolIO;
+class MolPolEvent;
+
+class MolPolPrimaryGeneratorAction : public G4VUserPrimaryGeneratorAction
+{
+  public:
+    MolPolPrimaryGeneratorAction();
+    ~MolPolPrimaryGeneratorAction();
+
+  public:
+    void GeneratePrimaries(G4Event* anEvent);
+    G4ParticleGun* GetParticleGun();
+    void SetIO( MolPolIO *io ){ fIO = io; }
+		bool Thetaspectrum(double );
+		bool pspectrum(double );
+		//void SourceModeSet();
+		void SourceModeSet(G4int );
+
+	private:
+    G4ParticleGun* fParticleGun;
+		G4int fSourceMode;
+
+    MolPolEvent *fDefaultEvent;
+    MolPolIO *fIO;
+
+  public:
+		G4double fXmin, fXmax, fYmin, fYmax;
+    G4double fZ;
+    G4double fEmin, fEmax;
+		G4double fthetaMin, fthetaMax;
+};
+
+#endif
+
+
